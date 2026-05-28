@@ -4,6 +4,84 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="4acAGDaj4iQHFF3MgATF-13" value="pm4：pm2增强版" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="1094" height="740" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-14" value="PM2共享骨架&#xa;final_repr / base_main_logit&#xa;change_hist_ctx / change_feat / hist_conf&#xa;clin_ctx / img_seq_ctx" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-13">
+          <mxGeometry x="299" y="46" width="233" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-15" value="pair_delta_head&#xa;输入 concat(final_repr, change_hist_ctx)&#xa;输出 pair_delta_logit&#xa;保留辅助转移风险监督" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-13">
+          <mxGeometry x="310" y="451" width="225" height="119" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-16" value="三专家 MoE_delta&#xa;clin_ctx → 临床专家&#xa;change_feat → 变化专家&#xa;img_seq_ctx → 图像专家&#xa;Router 加权融合" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-13">
+          <mxGeometry x="43" y="257" width="239" height="119" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-17" value="最终主预测&#xa;base_main_logit + hist_conf × alpha × MoE_delta&#xa;输出 main_prob" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-13">
+          <mxGeometry x="64" y="451" width="196" height="119" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-18" value="最终训练目标&#xa;main loss + pair_delta loss&#xa;+ worsen_aux loss&#xa;+ router regularization + gate loss" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-13">
+          <mxGeometry x="435" y="645" width="249" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-19" value="PM4新增 worsen_aux&#xa;change_feat → worsen_aux_head&#xa;输出 worsen_aux_logit&#xa;辅助监督是否恶化" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-13">
+          <mxGeometry x="585" y="451" width="222" height="119" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-20" value="PM4增强 Router 正则&#xa;balance loss&#xa;entropy loss&#xa;regularizer schedule" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-13">
+          <mxGeometry x="857" y="460" width="210" height="101" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-21" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.52;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-13" source="4acAGDaj4iQHFF3MgATF-14" target="4acAGDaj4iQHFF3MgATF-15">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="423" y="219" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-22" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0;exitY=0.85;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-13" source="4acAGDaj4iQHFF3MgATF-14" target="4acAGDaj4iQHFF3MgATF-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="162" y="219" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-23" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-13" source="4acAGDaj4iQHFF3MgATF-16" target="4acAGDaj4iQHFF3MgATF-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-24" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0;entryY=0.16;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-13" source="4acAGDaj4iQHFF3MgATF-17" target="4acAGDaj4iQHFF3MgATF-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="162" y="607" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-25" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.24;entryY=-0.01;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-13" source="4acAGDaj4iQHFF3MgATF-15" target="4acAGDaj4iQHFF3MgATF-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="423" y="607" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-26" value="" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.82;entryX=0.5;entryY=0;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-13" source="4acAGDaj4iQHFF3MgATF-14" target="4acAGDaj4iQHFF3MgATF-19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="696" y="219" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-27" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.76;entryY=-0.01;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-13" source="4acAGDaj4iQHFF3MgATF-19" target="4acAGDaj4iQHFF3MgATF-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="696" y="607" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-28" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=1;entryY=0.16;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-13" source="4acAGDaj4iQHFF3MgATF-20" target="4acAGDaj4iQHFF3MgATF-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="962" y="607" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
