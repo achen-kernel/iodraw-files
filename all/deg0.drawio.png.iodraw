@@ -1,0 +1,113 @@
+<mxfile host="www.iodraw.com" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" version="24.7.17">
+  <diagram name="第 1 页" id="ShCvtAhJlYZbobKyfsQ0">
+    <mxGraphModel dx="1562" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-217" value="deg0：基础版" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="20" y="20" width="591" height="1163" as="geometry" />
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-218" value="CSV + 时间排序&#xa;构造历史窗口" style="whiteSpace=wrap;strokeWidth=2;" parent="b_bLysc9hSU-DdLkAYu6-217" vertex="1">
+          <mxGeometry x="213" y="46" width="169" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-219" value="每个历史时点输入&#xa;CT图像 + 临床特征" style="whiteSpace=wrap;strokeWidth=2;" parent="b_bLysc9hSU-DdLkAYu6-217" vertex="1">
+          <mxGeometry x="201" y="187" width="193" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-220" value="图像编码&#xa;ViT + Primary/Burden&#xa;得到 image_step_feat" style="whiteSpace=wrap;strokeWidth=2;" parent="b_bLysc9hSU-DdLkAYu6-217" vertex="1">
+          <mxGeometry x="44" y="328" width="217" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-221" value="临床编码&#xa;连续特征 + 类别Embedding&#xa;得到 clin_step_feat" style="whiteSpace=wrap;strokeWidth=2;" parent="b_bLysc9hSU-DdLkAYu6-217" vertex="1">
+          <mxGeometry x="311" y="328" width="253" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-222" value="单时点融合&#xa;clin_step_feat + gated image_step_feat&#xa;得到 step_input" style="whiteSpace=wrap;strokeWidth=2;" parent="b_bLysc9hSU-DdLkAYu6-217" vertex="1">
+          <mxGeometry x="100" y="486" width="221" height="101" as="geometry" />
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-223" value="时序融合&#xa;LSTM(step_input)&#xa;得到 lstm_ctx" style="whiteSpace=wrap;strokeWidth=2;" parent="b_bLysc9hSU-DdLkAYu6-217" vertex="1">
+          <mxGeometry x="52" y="671" width="184" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-224" value="临床时序分支&#xa;Clinical LSTM(clin_step_feat)&#xa;得到 clin_ctx" style="whiteSpace=wrap;strokeWidth=2;" parent="b_bLysc9hSU-DdLkAYu6-217" vertex="1">
+          <mxGeometry x="343" y="662" width="211" height="101" as="geometry" />
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-225" value="final_repr&#xa;多模态时序融合表示&#xa;= lstm_ctx + last_step + clin_ctx&#xa;用于基础风险预测" style="whiteSpace=wrap;strokeWidth=2;" parent="b_bLysc9hSU-DdLkAYu6-217" vertex="1">
+          <mxGeometry x="175" y="838" width="231" height="119" as="geometry" />
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-226" value="main_head&#xa;输入 final_repr&#xa;输出 base_logit / main_prob" style="whiteSpace=wrap;strokeWidth=2;" parent="b_bLysc9hSU-DdLkAYu6-217" vertex="1">
+          <mxGeometry x="199" y="1032" width="183" height="101" as="geometry" />
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-227" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=-0.01;rounded=0;" parent="b_bLysc9hSU-DdLkAYu6-217" source="b_bLysc9hSU-DdLkAYu6-218" target="b_bLysc9hSU-DdLkAYu6-219" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-228" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.15;exitY=0.99;entryX=0.5;entryY=-0.01;rounded=0;" parent="b_bLysc9hSU-DdLkAYu6-217" source="b_bLysc9hSU-DdLkAYu6-219" target="b_bLysc9hSU-DdLkAYu6-220" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="153" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-229" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.84;exitY=0.99;entryX=0.5;entryY=-0.01;rounded=0;" parent="b_bLysc9hSU-DdLkAYu6-217" source="b_bLysc9hSU-DdLkAYu6-219" target="b_bLysc9hSU-DdLkAYu6-221" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="438" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-230" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.35;entryY=0;rounded=0;" parent="b_bLysc9hSU-DdLkAYu6-217" source="b_bLysc9hSU-DdLkAYu6-220" target="b_bLysc9hSU-DdLkAYu6-222" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="153" y="449" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-231" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.32;exitY=0.99;entryX=0.86;entryY=0;rounded=0;" parent="b_bLysc9hSU-DdLkAYu6-217" source="b_bLysc9hSU-DdLkAYu6-221" target="b_bLysc9hSU-DdLkAYu6-222" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="449" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-232" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.33;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="b_bLysc9hSU-DdLkAYu6-217" source="b_bLysc9hSU-DdLkAYu6-222" target="b_bLysc9hSU-DdLkAYu6-223" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="144" y="625" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-233" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.52;exitY=0.99;entryX=0.5;entryY=0;rounded=0;" parent="b_bLysc9hSU-DdLkAYu6-217" source="b_bLysc9hSU-DdLkAYu6-221" target="b_bLysc9hSU-DdLkAYu6-224" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="448" y="449" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-234" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.11;entryY=0;rounded=0;" parent="b_bLysc9hSU-DdLkAYu6-217" source="b_bLysc9hSU-DdLkAYu6-223" target="b_bLysc9hSU-DdLkAYu6-225" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="144" y="801" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-235" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.92;entryY=0;rounded=0;" parent="b_bLysc9hSU-DdLkAYu6-217" source="b_bLysc9hSU-DdLkAYu6-224" target="b_bLysc9hSU-DdLkAYu6-225" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="448" y="801" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-236" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.71;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="b_bLysc9hSU-DdLkAYu6-217" source="b_bLysc9hSU-DdLkAYu6-222" target="b_bLysc9hSU-DdLkAYu6-225" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="291" y="625" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_bLysc9hSU-DdLkAYu6-237" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" parent="b_bLysc9hSU-DdLkAYu6-217" source="b_bLysc9hSU-DdLkAYu6-225" target="b_bLysc9hSU-DdLkAYu6-226" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
