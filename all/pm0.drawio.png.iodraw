@@ -1,0 +1,70 @@
+<mxfile host="www.iodraw.com" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" version="24.7.17">
+  <diagram name="第 1 页" id="ShCvtAhJlYZbobKyfsQ0">
+    <mxGraphModel dx="1562" dy="810" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4acAGDaj4iQHFF3MgATF-1" value="pm0：deg0 + 历史变化 / pair-delta" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="644" height="617" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-2" value="deg0 基础版模块&#xa;CT + 临床 → LSTM&#xa;输出 final_repr / base_logit" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-1">
+          <mxGeometry x="51" y="81" width="259" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-3" value="pair_delta_head&#xa;输入: final_repr + change_hist_feat&#xa;输出 pair_delta_logit&#xa;学习历史变化对应的转归风险" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-1">
+          <mxGeometry x="45" y="275" width="253" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-4" value="main_delta_head&#xa;输入: final_repr + change_hist_feat&#xa;输出 delta_logit&#xa;用于修正基础预测" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-1">
+          <mxGeometry x="412" y="283" width="188" height="119" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-5" value="历史变化特征 change_hist_feat&#xa;来源：同一患者历史窗口 hist_states&#xa;统计标签变化、改善/恶化/稳定比例、时间间隔、growth趋势、regimen变化等" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-1">
+          <mxGeometry x="360" y="46" width="256" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-6" value="融合预测&#xa;base_logit + hist_conf * alpha * delta_logit&#xa;输出 main_prob" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="4acAGDaj4iQHFF3MgATF-1">
+          <mxGeometry x="221" y="486" width="228" height="101" as="geometry" />
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-7" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.39;exitY=0.99;entryX=0.32;entryY=0;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-1" source="4acAGDaj4iQHFF3MgATF-2" target="4acAGDaj4iQHFF3MgATF-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="100" y="237" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-8" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.74;exitY=0.99;entryX=0.04;entryY=0;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-1" source="4acAGDaj4iQHFF3MgATF-2" target="4acAGDaj4iQHFF3MgATF-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="352" y="237" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-9" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.07;exitY=1;entryX=0.89;entryY=0;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-1" source="4acAGDaj4iQHFF3MgATF-5" target="4acAGDaj4iQHFF3MgATF-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="325" y="237" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-10" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.69;exitY=1;entryX=0.66;entryY=0;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-1" source="4acAGDaj4iQHFF3MgATF-5" target="4acAGDaj4iQHFF3MgATF-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="237" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-11" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.09;entryY=0;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-1" source="4acAGDaj4iQHFF3MgATF-3" target="4acAGDaj4iQHFF3MgATF-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="171" y="448" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4acAGDaj4iQHFF3MgATF-12" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.93;entryY=0;rounded=0;" edge="1" parent="4acAGDaj4iQHFF3MgATF-1" source="4acAGDaj4iQHFF3MgATF-4" target="4acAGDaj4iQHFF3MgATF-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="506" y="448" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
